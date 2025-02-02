@@ -1,8 +1,8 @@
-// backend/server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+require('dotenv').config();  // This loads the .env file
 
 // Create an Express app
 const app = express();
@@ -11,8 +11,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/studentdb', { useNewUrlParser: true, useUnifiedTopology: true })
+// Connect to MongoDB using the connection string from environment variables
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
